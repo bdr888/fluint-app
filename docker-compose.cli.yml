@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  be-cli:
+    image: node:18
+    working_dir: /app
+    env_file: 
+      - ./env/common.env
+    volumes:
+      - ~/.aws/:/root/.aws/
+      - ./be:/app
+  fe-cli:
+    image: node:18
+    working_dir: /app
+    env_file: 
+      - ./env/common.env
+    volumes:
+      - ~/.aws/:/root/.aws/
+      - ./fe:/app

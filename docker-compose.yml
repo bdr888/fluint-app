@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  be:
+    image: node:18
+    working_dir: /app
+    volumes:
+      - ./be:/app
+    env_file: 
+      - env/common.env
+    expose:
+      - 3000
+    ports:
+      - "3000:3000"
+    entrypoint: ["npm", "run", "start:dev"]
+    networks:
+      - backend
+  fe:
+    image: node:18
+    working_dir: /app
+    volumes:
+      - ./fe:/app
+    env_file: 
+      - env/common.env
+    expose:
+      - 3000
+    ports:
+      - "8080:3000"
+    entrypoint: ["npm", "run", "dev"]
+    networks:
+      - backend
+  mongodb:
+    image: mongo:latest
+    networks:
+      - backend
+
+networks:
+  backend:
+    name: backend
